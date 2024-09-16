@@ -1,0 +1,22 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+ --customDefaultBackground: rgb(34, 27, 44);
+ --customDefaultWhite: rgb(255, 242, 251);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  background-color: var(--customDefaultBackground);
+  color: var(--customDefaultWhite);
+  min-height: 100vh;
+  font-family: "Homemade Apple", cursive, Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+}
