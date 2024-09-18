@@ -1,6 +1,6 @@
 <script setup>
 import CustomTodoComponent from '@/components/CustomTodoComponent.vue'
-import { ref, watch, provide } from 'vue'
+import { ref, provide } from 'vue'
 
 const todos = ref([])
 const newTodo = ref('')
@@ -17,14 +17,6 @@ const handleInsert = () => {
     newTodo.value = ''
   }
 }
-
-// watch(
-//   todos,
-//   (newTodos) => {
-//     localStorage.setItem('todos', JSON.stringify(newTodos))
-//   },
-//   { deep: true }
-// )
 
 function editTodo(id, newTitle) {
   const todoIndex = todos.value.findIndex(todo => todo.id === id)

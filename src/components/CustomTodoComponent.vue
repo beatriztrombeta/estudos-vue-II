@@ -1,41 +1,25 @@
 <script setup>
-import { ref, inject } from 'vue'
+import { inject, ref } from 'vue'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
 
 //--------------CONSTANTES-----------------
+
+const checked = ref(false)
+const confirm = useConfirm()
+const deleteTodo = inject('deleteTodo')
+const editTodo = inject('editTodo')
+const isEditing = ref(false)
+const newTitle = ref(props.text)
+const toast = useToast()
+const visible = ref(false)
 
 const props = defineProps({
   id: Number,
   text: String
 })
 
-const checked = ref(false)
-const visible = ref(false)
-const isEditing = ref(false)
-const newTitle = ref(props.text)
-
-const confirm = useConfirm()
-
-const toast = useToast()
-
-const editTodo = inject('editTodo')
-const deleteTodo = inject('deleteTodo')
-
 //-----------------FUNÇÕES-------------------
-
-const handleEdit = () => {
-  if (isEditing.value) {
-    if (newTitle.value.trim()) {
-      editTodo(props.id, newTitle.value)  
-      isEditing.value = false
-      visible.value = false
-    }
-  } else {
-    isEditing.value = true
-    visible.value = true
-  }
-}
 
 const handleDelete = () => {
   confirm.require({
@@ -57,6 +41,20 @@ const handleDelete = () => {
     }
   })
 }
+
+const saveEdit = () => {
+  if (newTitle.value.trim()) {
+    editTodo(props.id, newTitle.value)
+    isEditing.value = false
+    visible.value = false
+  }
+}
+
+const startEdit = () => {
+  isEditing.value = true
+  visible.value = true
+}
+
 </script>
 
 <template>
@@ -79,7 +77,7 @@ const handleDelete = () => {
         severity="secondary"
         @click="visible = false"
       ></TheButton>
-      <TheButton type="button" label="Save" @click="handleEdit"></TheButton>
+      <TheButton type="button" label="Save" @click="saveEdit"></TheButton>
     </div>
   </TheDialog>
   <main class="flex flex-col gap-5 items-start">
@@ -89,7 +87,7 @@ const handleDelete = () => {
         <label>{{ props.text }}</label>
       </div>
       <div class="flex flex-row">
-        <TheButton icon="pi pi-pencil" aria-label="edit" @click="handleEdit" text />
+        <TheButton icon="pi pi-pencil" aria-label="edit" @click="startEdit" text />
         <TheButton icon="pi pi-trash" aria-label="delete" @click="handleDelete" text />
       </div>
     </section>
