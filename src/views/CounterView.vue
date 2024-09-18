@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, watchEffect } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useToast } from 'primevue/usetoast';
 
 const count = ref(0);
@@ -23,22 +23,12 @@ const show = () => {
   });
 };
 
-const handlePlus = () => {
-  count.value++;
-};
-
 
 watch(isMultipleOfTen, (newVal) => {
   if (newVal && count.value !== 0) {
     show();
   }
 });
-
-// watchEffect(() => {
-//   if (isMultipleOfTen.value && count.value !== 0) {
-//     show();
-//   }
-// })
 
 </script>
 
@@ -49,7 +39,7 @@ watch(isMultipleOfTen, (newVal) => {
       <span class="font-sans text-7xl">{{ count }}</span>
       <div class="flex flex-col gap-5">
         <div class="flex gap-10">
-          <TheButton icon="pi pi-plus" @click="handlePlus" :disabled="count >= 50" />
+          <TheButton icon="pi pi-plus" @click="count++" :disabled="count >= 50" />
           <TheButton icon="pi pi-minus" @click="count--" :disabled="count <= 0" />
         </div>
         <div class="">

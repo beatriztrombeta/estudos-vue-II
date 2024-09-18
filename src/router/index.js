@@ -15,9 +15,14 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/counter',
-      name: 'counter',
+      path: '/refcounter',
+      name: 'refcounter',
       component: () => import('../views/CounterView.vue')
+    },
+    {
+      path: '/reactivecounter',
+      name: 'reactivecounter',
+      component: () => import('../views/CounterReactiveView.vue')
     },
     {
       path: '/todo',
