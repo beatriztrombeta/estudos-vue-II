@@ -2,8 +2,8 @@
 import CustomTodoComponent from '@/components/CustomTodoComponent.vue'
 import { ref, provide } from 'vue'
 
-const todos = ref([])
 const newTodo = ref('')
+const todos = ref([])
 
 provide('deleteTodo', deleteTodo)
 provide('editTodo', editTodo)
@@ -18,6 +18,13 @@ const handleInsert = () => {
   }
 }
 
+function deleteTodo(id) {
+  const todoIndex = todos.value.findIndex(todo => todo.id === id)
+  if (todoIndex !== -1) {
+    todos.value.splice(todoIndex, 1)
+  }
+}
+
 function editTodo(id, newTitle) {
   const todoIndex = todos.value.findIndex(todo => todo.id === id)
   if (todoIndex !== -1) {
@@ -25,12 +32,6 @@ function editTodo(id, newTitle) {
   }
 }
 
-function deleteTodo(id) {
-  const todoIndex = todos.value.findIndex(todo => todo.id === id)
-  if (todoIndex !== -1) {
-    todos.value.splice(todoIndex, 1)
-  }
-}
 
 </script>
 
